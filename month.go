@@ -7,17 +7,30 @@ import (
 	"time"
 )
 
+type MonthFormat int
+
+const (
+	MM MonthFormat = iota
+	M
+	mm
+	m
+)
+
+func (m MonthFormat) toString() string {
+	return []string{"MM", "M", "mm", "m"}[m]
+}
+
 func extractMonth(now time.Time, format string) (string, error) {
 	month := fmt.Sprintf("%s", now.Month())
 
 	switch format {
-	case "MM":
+	case MM.toString():
 		return month, nil
-	case "mm":
+	case mm.toString():
 		return strings.ToLower(month), nil
-	case "M":
+	case M.toString():
 		return month[:3], nil
-	case "m":
+	case m.toString():
 		return strings.ToLower(month[:3]), nil
 	default:
 		return "", errors.New("Unsupported month format")
