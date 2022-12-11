@@ -2,7 +2,7 @@ package timestone
 
 import (
 	"errors"
-	"fmt"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -21,7 +21,7 @@ func (m MonthFormat) toString() string {
 }
 
 func extractMonth(now time.Time, format string) (string, error) {
-	month := fmt.Sprintf("%s", now.Month())
+	month := strconv.Itoa(int(now.Month()))
 
 	switch format {
 	case MM.toString():
